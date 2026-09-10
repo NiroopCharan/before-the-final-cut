@@ -4,7 +4,7 @@ import { InvitationSection, TicketGenerator } from "./Invitation";
 import { BeforeClockSection, Credits } from "./CastAndMemory";
 
 const EVENT_DATE = "26 September 2026";
-const EVENT_TIME = "6:00 PM — 10:00 PM";
+const EVENT_TIME = "5:00 PM — 10:00 PM";
 
 function FilmStrip() {
   const frames = Array.from({ length: 14 });

@@ -114,5 +114,5 @@ export function BeforeClockSection() {
 }
 
 export function Credits() {
-  return <section className="credits-section" id="credits"><p className="kicker">THE CREDITS</p><h3>THE NIGHT ENDS.<br/><span>THE MEMORIES DON’T.</span></h3><div className="credits-grid"><div><span>STARRING</span><b>THE GRADUATING BATCH</b></div><div><span>DIRECTED BY</span><b>THE JUNIORS</b></div><div><span>DATE</span><b>26 SEPTEMBER 2026</b></div><div><span>SHOWTIME</span><b>6:00 PM — 10:00 PM</b></div></div><p className="credits-finale">SEE YOU AT THE FINAL SCREENING.</p><p className="credits-date">26 • 09 • 2026</p></section>
+  return <section className="credits-section" id="credits"><p className="kicker">THE CREDITS</p><h3>THE NIGHT ENDS.<br/><span>THE MEMORIES DON’T.</span></h3><div className="credits-grid"><div><span>STARRING</span><b>THE GRADUATING BATCH</b></div><div><span>DIRECTED BY</span><b>THE JUNIORS</b></div><div><span>DATE</span><b>26 SEPTEMBER 2026</b></div><div><span>SHOWTIME</span><b>5:00 PM — 10:00 PM</b></div></div><p className="credits-finale">SEE YOU AT THE FINAL SCREENING.</p><p className="credits-date">26 • 09 • 2026</p></section>
 }

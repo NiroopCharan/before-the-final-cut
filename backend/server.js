@@ -13,6 +13,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const MONGO_URI = process.env.MONGO_URI || "mongodb://127.0.0.1:27017/farewell2026";
 
+console.log("Connecting to:", MONGO_URI.includes("mongodb+srv") ? "MongoDB Atlas Cloud" : "Localhost MongoDB");
 /* --------------------------------
    DATABASE CONNECTION
 -------------------------------- */

@@ -4,7 +4,7 @@ const EVENT = {
   title: "BEFORE THE FINAL CUT",
   subTitle: "FAREWELL 2026",
   date: "26 SEPTEMBER 2026",
-  time: "6:00 PM — 10:00 PM",
+  time: "5:00 PM — 10:00 PM",
   venue: "AMPHI THEATER",
   host: "The Juniors",
 };
@@ -311,7 +311,7 @@ export function TicketGenerator({ open, onClose }) {
                   </div>
                   <div className="rt-meta-cell">
                     <span>TIME</span>
-                    <b>6:00 PM</b>
+                    <b>5:00 PM</b>
                   </div>
                   <div className="rt-meta-cell full-width">
                     <span>VENUE</span>
