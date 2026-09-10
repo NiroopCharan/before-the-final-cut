@@ -7,6 +7,12 @@ const seniorSchema = new mongoose.Schema(
       required: [true, "Name is required"],
       trim: true,
     },
+    usn: {
+      type: String,
+      required: [true, "USN is required"],
+      trim: true,
+      uppercase: true,
+    },
     photo: {
       type: String,
       required: [true, "Photo is required"],
