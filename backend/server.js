@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
+app.use(cors()); // Allows requests from any origin including Vercel
 const multer = require("multer");
 const mongoose = require("mongoose");
 const fs = require("fs");
