@@ -1,7 +1,6 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-app.use(cors()); // Allows requests from any origin including Vercel
 const multer = require("multer");
 const mongoose = require("mongoose");
 const fs = require("fs");
@@ -14,10 +13,11 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const MONGO_URI = process.env.MONGO_URI || "mongodb://127.0.0.1:27017/farewell2026";
 
-console.log("Connecting to:", MONGO_URI.includes("mongodb+srv") ? "MongoDB Atlas Cloud" : "Localhost MongoDB");
 /* --------------------------------
    DATABASE CONNECTION
 -------------------------------- */
+console.log("Connecting to:", MONGO_URI.includes("mongodb+srv") ? "MongoDB Atlas Cloud" : "Localhost MongoDB");
+
 mongoose
   .connect(MONGO_URI)
   .then(() => console.log("Connected to MongoDB database."))
@@ -26,15 +26,16 @@ mongoose
 /* --------------------------------
    MIDDLEWARE
 -------------------------------- */
-app.use(cors());
-app.use(express.json());
+app.use(cors({ origin: "*" }));
+app.use(express.json({ limit: "25mb" }));
+app.use(express.urlencoded({ extended: true, limit: "25mb" }));
 
 /* --------------------------------
    STATIC UPLOADS
 -------------------------------- */
 const uploadsDirectory = path.join(__dirname, "uploads");
 if (!fs.existsSync(uploadsDirectory)) {
-  fs.mkdirSync(uploadsDirectory);
+  fs.mkdirSync(uploadsDirectory, { recursive: true });
 }
 app.use("/uploads", express.static(uploadsDirectory));
 
@@ -54,7 +55,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({
   storage: storage,
-  limits: { fileSize: 5 * 1024 * 1024 },
+  limits: { fileSize: 15 * 1024 * 1024 }, // 15MB limit
   fileFilter: (req, file, cb) => {
     const allowedTypes = ["image/jpeg", "image/png", "image/webp"];
     if (allowedTypes.includes(file.mimetype)) {
@@ -68,7 +69,6 @@ const upload = multer({
 /* --------------------------------
    ROUTES
 -------------------------------- */
-
 app.get("/", (req, res) => {
   res.json({
     success: true,
@@ -82,24 +82,15 @@ app.post("/api/seniors", upload.single("photo"), async (req, res) => {
     const { name, usn } = req.body;
 
     if (!name || !name.trim()) {
-      return res.status(400).json({
-        success: false,
-        message: "Name is required.",
-      });
+      return res.status(400).json({ success: false, message: "Name is required." });
     }
 
     if (!usn || !usn.trim()) {
-      return res.status(400).json({
-        success: false,
-        message: "USN is required.",
-      });
+      return res.status(400).json({ success: false, message: "USN is required." });
     }
 
     if (!req.file) {
-      return res.status(400).json({
-        success: false,
-        message: "Photo is required.",
-      });
+      return res.status(400).json({ success: false, message: "Photo is required." });
     }
 
     const senior = await Senior.create({
@@ -134,10 +125,7 @@ app.post("/api/experiences", async (req, res) => {
     const { experience } = req.body;
 
     if (!experience || !experience.trim()) {
-      return res.status(400).json({
-        success: false,
-        message: "Experience cannot be empty.",
-      });
+      return res.status(400).json({ success: false, message: "Experience cannot be empty." });
     }
 
     const newExperience = await Experience.create({
@@ -162,15 +150,9 @@ app.post("/api/experiences", async (req, res) => {
 app.get("/api/seniors", async (req, res) => {
   try {
     const seniors = await Senior.find().sort({ createdAt: -1 });
-    res.json({
-      success: true,
-      seniors,
-    });
+    res.json({ success: true, seniors });
   } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: "Unable to retrieve seniors.",
-    });
+    res.status(500).json({ success: false, message: "Unable to retrieve seniors." });
   }
 });
 
@@ -178,15 +160,9 @@ app.get("/api/seniors", async (req, res) => {
 app.get("/api/experiences", async (req, res) => {
   try {
     const experiences = await Experience.find().sort({ createdAt: -1 });
-    res.json({
-      success: true,
-      experiences,
-    });
+    res.json({ success: true, experiences });
   } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: "Unable to retrieve experiences.",
-    });
+    res.status(500).json({ success: false, message: "Unable to retrieve experiences." });
   }
 });
 
