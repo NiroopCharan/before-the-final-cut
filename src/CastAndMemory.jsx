@@ -1,5 +1,9 @@
 import { useState } from "react";
 
+const API_BASE = (
+  import.meta.env.VITE_API_URL || "https://before-the-final-cut.onrender.com"
+).replace(/\/+$/, "");
+
 export function BeforeClockSection() {
   const [experience, setExperience] = useState("");
   const [shared, setShared] = useState(false);
@@ -10,7 +14,7 @@ export function BeforeClockSection() {
   if (!experience.trim()) return;
 
   try {
-    const response = await fetch("http://localhost:5000/api/experiences", {
+    const response = await fetch(`${API_BASE}/api/experiences`, {
       method: "POST",
 
       headers: {
