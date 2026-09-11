@@ -205,7 +205,7 @@ export function TicketGenerator({ open, onClose }) {
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                placeholder="e.g. Adam and Eve"
+                placeholder="e.g. Rama and Sita"
                 autoComplete="off"
               />
             </label>
