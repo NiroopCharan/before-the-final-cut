@@ -8,7 +8,7 @@ const EVENT = {
   title: "BEFORE THE FINAL CUT",
   subTitle: "FAREWELL 2026",
   date: "26 SEPTEMBER 2026",
-  time: "5:00 PM — 10:00 PM",
+  time: "5:00 PM — 8:00 PM",
   venue: "AMPHI THEATER",
   host: "The Juniors",
 };
