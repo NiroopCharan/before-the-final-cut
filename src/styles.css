@@ -1292,11 +1292,11 @@ a {
 .royal-ticket {
   position: relative;
   display: grid;
-  grid-template-columns: 240px auto 1fr;
+  grid-template-columns: 240px 18px 1fr;
   width: min(840px, 100%);
   margin: 2.5rem auto 1.5rem;
   background: radial-gradient(circle at 75% 20%, rgba(98, 18, 31, 0.28), transparent 45%), #0a0908;
-  border: 3.5px solid #d6b06d;
+  border: 2px solid #d6b06d;
   box-shadow:
     0 25px 80px rgba(0, 0, 0, 0.9),
     inset 0 0 35px rgba(214, 176, 109, 0.08);
@@ -1324,21 +1324,44 @@ a {
   background: radial-gradient(circle at 10% 90%, rgba(139, 0, 0, 0.22), transparent 40%);
 }
 
-/* 4 Corner Inward Notches */
+/* 4 Inward Die-Cut Corner Scoops */
 .notch {
   position: absolute;
-  width: 26px;
-  height: 26px;
-  background: #090806;
-  border: 3.5px solid #d6b06d;
+  width: 32px;
+  height: 32px;
+  background: #090806; /* Matches modal container backdrop */
+  border: 2px solid #d6b06d;
   border-radius: 50%;
-  z-index: 5;
+  z-index: 10;
 }
 
-.notch-tl { top: -14px; left: -14px; }
-.notch-tr { top: -14px; right: -14px; }
-.notch-bl { bottom: -14px; left: -14px; }
-.notch-br { bottom: -14px; right: -14px; }
+/* Top-Left Scoop */
+.notch-tl {
+  top: -18px;
+  left: -18px;
+  clip-path: polygon(50% 50%, 100% 50%, 100% 100%, 50% 100%);
+}
+
+/* Top-Right Scoop */
+.notch-tr {
+  top: -18px;
+  right: -18px;
+  clip-path: polygon(0 50%, 50% 50%, 50% 100%, 0 100%);
+}
+
+/* Bottom-Left Scoop */
+.notch-bl {
+  bottom: -18px;
+  left: -18px;
+  clip-path: polygon(50% 0, 100% 0, 100% 50%, 50% 50%);
+}
+
+/* Bottom-Right Scoop */
+.notch-br {
+  bottom: -18px;
+  right: -18px;
+  clip-path: polygon(0 0, 50% 0, 50% 50%, 0 50%);
+}
 
 /* LEFT STUB: Photo & Name Only */
 .rt-left {
@@ -1348,7 +1371,6 @@ a {
   align-items: center;
   justify-content: center;
   background: linear-gradient(180deg, rgba(214, 176, 109, 0.04), rgba(74, 15, 25, 0.15));
-  border-right: 1px solid rgba(214, 176, 109, 0.2);
 }
 
 .rt-badge-top {
@@ -1403,6 +1425,7 @@ a {
   position: relative;
   width: 18px;
   display: flex;
+  align-items: center;
   justify-content: center;
 }
 
@@ -1414,16 +1437,27 @@ a {
 
 .notch-perf {
   position: absolute;
-  width: 22px;
-  height: 22px;
-  background: #090806;
-  border: 3.5px solid #d6b06d;
+  width: 30px;
+  height: 30px;
+  background: #090806; /* Matches modal container backdrop */
+  border: 2px solid #d6b06d;
   border-radius: 50%;
-  z-index: 5;
+  z-index: 10;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
-.notch-perf-top { top: -12px; }
-.notch-perf-bottom { bottom: -12px; }
+/* Top Seam Punch Scoop */
+.notch-perf-top {
+  top: -17px;
+  clip-path: polygon(0 50%, 100% 50%, 100% 100%, 0 100%);
+}
+
+/* Bottom Seam Punch Scoop */
+.notch-perf-bottom {
+  bottom: -17px;
+  clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
+}
 
 /* RIGHT MAIN: Event Details & USN */
 .rt-right {
@@ -1610,7 +1644,7 @@ a {
   .royal-ticket {
     animation: none !important;
     box-shadow: none !important;
-    border: 3.5px solid #d6b06d !important;
+    border: 2px solid #d6b06d !important;
     background: #0a0908 !important;
     margin: 1.5rem auto !important;
     page-break-inside: avoid !important;
@@ -1644,14 +1678,24 @@ a {
     border-top: 2px dashed rgba(214, 176, 109, 0.45);
   }
 
+  .notch-perf {
+    left: auto;
+    transform: none;
+  }
+
   .notch-perf-top {
-    left: -12px;
-    top: -2px;
+    left: -17px;
+    top: 50%;
+    transform: translateY(-50%);
+    clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%);
   }
 
   .notch-perf-bottom {
-    right: -12px;
-    bottom: -2px;
+    right: -17px;
+    bottom: auto;
+    top: 50%;
+    transform: translateY(-50%);
+    clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
   }
 
   .rt-right {
